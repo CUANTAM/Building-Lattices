@@ -1,2 +1,6 @@
 # Building-Lattices
-Example scripts demonstrating how to build idealized crystal lattices
+
+The file buildLattice.py is a simple program that writes a
+configuration file in either a .dat or .xyz format.
+
+
