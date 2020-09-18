@@ -9,11 +9,11 @@ the program, edit the section with the header:
 The parameters that must be provided are:
 - A name for your system
 - A lattice constant
-- Unit cell vectors (a1,a2,a3)
-- Basis vectors (bs=b1,...,bn)
+- Unit cell generating vectors (a1,a2,a3)
+- Basis atom position vectors (bs=b1,...,bn)
 - Masses for each basis atom
 - Types (1,2,...N) for each basis atom
-- Supercell dimensions as a multiple of unit cell vectors
+- Supercell dimensions as a multiple of generating vectors
 - The file type (xyz or dat) you'd like to save
 
 Once the parameters are set, simply save and run the program:
