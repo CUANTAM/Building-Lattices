@@ -23,3 +23,5 @@ $: python3 buildLattices.py
 and a new file, "(name).(fType)", should appear in your
 directory. The parameters currently set in the file are
 for a 2x2x2 conventional unit cell germanium lattice.
+
+REQUIRED PYTHON LIBRARIES: numpy
