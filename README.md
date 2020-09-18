@@ -21,3 +21,5 @@ Once the parameters are set, simply save and run the program:
 $: python3 buildLattices.py
 
 and a new file, (name).(fType) should appear in the directory.
+The parameters currently set in the file are for a germanium
+(Ge) lattice
