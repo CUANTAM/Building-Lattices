@@ -25,6 +25,7 @@ bs = [[0,0,0],\
     [0,.5,.5],\
     [.25,.75,.75]]
 
+# Define the mass of each atoms in your basis
 masses = [72.63 for i in range(len(bs))]
 
 # Define the type of each atoms in your basis
@@ -49,8 +50,6 @@ ls = array(dims)
 # Determine system information from inputs
 nCell = array(cell).shape[0]
 nAtoms = int(nCell*ls.prod())
-lims = dims[0]*base[0]+dims[1]*base[1]+dims[2]*base[2]
-mset = unique(array(masses))
 
 # Determine atomic positions
 pos = zeros((nAtoms,3))
@@ -65,6 +64,10 @@ for i in range(dims[0]):
 
 # Save configuraiton in requested format
 if fType == "dat":
+    
+    # Determine box limits and unique set of masses
+    lims = dims[0]*base[0]+dims[1]*base[1]+dims[2]*base[2]
+    mset = unique(array(masses))
 
     # Write a .dat configuration file
     preamble = "Start File for LAMMPS\n\n"\
@@ -90,7 +93,7 @@ elif fType == "xyz":
         xyzFile.write("id mass x y z")
         for a in range(nAtoms):
             xyzFile.write("%d\t%.3f\t%.4f\t%.4f\t%.4f\n"\
-                %(a+1,mset[types[a%nCell]],pos[a,0],pos[a,1],pos[a,2]))
+                %(a+1,masses[a%nCell],pos[a,0],pos[a,1],pos[a,2]))
 
 else:
     print("ERROR: fType not understood.")
