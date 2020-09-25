@@ -1,10 +1,10 @@
-# H1 Building-Lattices
+# Building-Lattices
 
-# H2 Introduction
+## Introduction
 
 The function of this repository is to write lattice configuration files for crystalline solids. There are two methods by which this can be done: bulk building, in which material unit cells are arranged into a rectangular supercell; and grid building, in which an empty 3D grid is created and filled with unit cells according to specification (allowing for substructuring within the system). A list with short descriptions of each program is given below, followed by sections with more detailed information and instructions.
 
-# H3 Programs
+### Programs
 - bulkBuild.py
 -- Program used to carry out bulk building
 - gridBuild.py
@@ -16,7 +16,9 @@ The function of this repository is to write lattice configuration files for crys
 
 In each of the programs listed above, excluding writeLattice.py, there is a section for choosing parameters and a section for carrying out the protocol (clearly marked). Unless you are attempting to extend the function of these programs for your own use, it is not recommended that you make any changes to the latter section.
 
-# H2 bulkBuild.py
+All programs in this repository require numpy.
+
+## bulkBuild.py
 
 To perform build building, open this file and change the following variables in the parameters section:
 - **name:** A name for your system (string)
@@ -31,10 +33,8 @@ Once these parameters are set, save and run the program:
 
 $: python3 buildLattices.py
 
-# H2 gridBuild.py
+## gridBuild.py
 
-# H2 surfaceSi.py
+## surfaceSi.py
 
-# H2 writeLattice.py
-
-REQUIRED PYTHON LIBRARIES: numpy
+## writeLattice.py
