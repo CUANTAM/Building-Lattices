@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The function of this repository is to write lattice configuration files for crystalline solids. There are two methods by which this can be done: bulk building, in which material unit cells are arranged into a rectangular supercell; and grid building, in which an empty 3D grid is created and filled with unit cells according to specification (allowing for substructuring within the system). A list with short descriptions of each program is given below, followed by sections with more detailed information and instructions.
+The function of this repository is to write lattice configuration files for crystalline solids. There are two methods by which this can be done: bulk building, in which material unit cells are arranged into a supercell; and grid building, in which an empty 3D grid is created and filled with unit cells according to specification (allowing for substructuring within the system). A list with short descriptions of each program is given below, followed by sections with more detailed information and instructions.
 
 ### Programs
 
@@ -22,6 +22,7 @@ All programs in this repository require numpy.
 ## bulkBuild.py
 
 During bulk building, a perfect crystal unit cell is repeated a specified number of times in three dimensions in order to produce a rectangular crystal supercell. To perform bulk building, open buildBulk.py and change the following variables in the parameters section:
+
 - **name:** A name for your system (string)
 - **lc:** A lattice constant (float)
 - **a1, a2, a3:** Unit cell generating vectors (lists)
@@ -37,6 +38,7 @@ $: python3 bulkBuild.py
 ## gridBuild.py
 
 During grid building, an empty unit cell grid of specified dimensions is filled with perfect crystal unit cells according to specified conditions. Regions of the grid may be left empty, allowing for the creation of substructured systems (e.g. membranes, wires, and substrates with surface features). To perform grid building, open gridBuild.py and change the following variables in the parameters section:
+
 - **name:** A name for your system (string)
 - **lc:** A lattice constant (float)
 - **a1, a2, a3:** Unit cell generating vectors (lists)
@@ -65,28 +67,14 @@ $: python3 gridBuild.py
 
 ## surfaceSi.py
 
-During grid building, an empty unit cell grid of specified dimensions is filled with perfect crystal unit cells according to specified conditions. Regions of the grid may be left empty, allowing for the creation of substructured systems (e.g. membranes, wires, and substrates with surface features). To perform grid building, open gridBuild.py and change the following variables in the parameters section:
+Unlike the configurations created by gridBuild.py, real Silicon (Si) systems do not exhibit regular crystal structure along exposed [1 0 0] surfaces. Rather, the atoms along these surfaces undergo restructuring caused by the presence of dangling bonds (Appelbaum et al, 1976). The surfaceSi.py program builds a conventional cell Si system using the grid method and parses the "fill" variable to automatically detect surfaces. Then, during the configuration building phase, atoms along the surfaces are shifted in order to produce the observed crystal structure and equilibrium bond lengths. Just as with gridBuild.py, this syntax can be used to create Si systems with various substructures. To build surface reconstructed Si systems, open surfaceSi.py and change the following variables in the parameters section:
+
 - **name:** A name for your system (string)
-- **lc:** A lattice constant (float)
-- **a1, a2, a3:** Unit cell generating vectors (lists)
-- **bs:** Position vectors for each atom in your basis (nested list)
-- **ms:** Masses for each atom in your basis (list)
+- **aSi:** A lattice constant for Si, or 0 for default (float)
+- **mSi:** A mass for Si, or 0 for default (float)
 - **dims:** Grid dimensions as multiples of generating vectors (list)
 - **fill:** List of grid elements that should be filled (list)
 - **fType:** The file type you'd like to save (string, "xyz" or "dat")
-
-The variable "fill" can become very cumbersome for large systems when defined element by element. In most cases, it is much quicker and easier to define "fill" using logical conditions on the x, y, and z coordinates of the grid elements. This can be done as follows (starting from grid definition):
-
-```
-# Define grid dimensions
-dims = [8,8,8]
-
-# Assign filled elements of grid
-fill = [[[(z>=2)*(z<6) \
-    for z in range(dims[2])] for y in range(dims[1])] for x in range(dims[0])]
-```
-
-In this example, a cubic 8x8x8 unit cell grid has been defined, but only the elements with z>=2 and z<6 are filled, creating an 8x8x4 membrane of unit cells with 2 unit cell vacant regions above and below. Using this flexible syntax, many different kinds of structures (such as the ones mentioned above can be produced.
 
 Once all parameters have been set, save and run the program:
 
