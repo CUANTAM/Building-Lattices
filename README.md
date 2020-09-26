@@ -6,14 +6,14 @@ The function of this repository is to write lattice configuration files for crys
 
 ### Programs
 
-* bulkBuild.py
-** Program used to carry out bulk building
-* gridBuild.py
-** Program used to carry out grid building
-* surfaceSi.py
-** A grid building program for surface reconstructed Silicon
-* writeLattice.py
-** Functions for writing various types of configuration files
+- bulkBuild.py
+  - Program used to carry out bulk building
+- gridBuild.py
+  - Program used to carry out grid building
+- surfaceSi.py
+  - A grid building program for surface reconstructed Silicon
+- writeLattice.py
+  - Functions for writing various types of configuration files
 
 In each of the programs listed above, excluding writeLattice.py, there is a section for choosing parameters and a section for carrying out the protocol (clearly marked). Unless you are attempting to extend the function of these programs for your own use, it is not recommended that you make any changes to the latter section.
 
