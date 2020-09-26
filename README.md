@@ -30,9 +30,9 @@ During bulk building, a perfect crystal unit cell is repeated a specified number
 - **dims:** Supercell dimensions as multiples of generating vectors (list)
 - **fType:** The file type you'd like to save (string, "xyz" or "dat")
 
-Once these parameters are set, save and run the program:
+Once all parameters have been set, save and run the program:
 
-$: python3 buildLattices.py
+$: python3 bulkBuild.py
 
 ## gridBuild.py
 
@@ -46,14 +46,50 @@ During grid building, an empty unit cell grid of specified dimensions is filled 
 - **fill:** List of grid elements that should be filled (list)
 - **fType:** The file type you'd like to save (string, "xyz" or "dat")
 
-The variable "fill" could become very cumbersome for large systems...
+The variable "fill" can become very cumbersome for large systems when defined element by element. In most cases, it is much quicker and easier to define "fill" using logical conditions on the x, y, and z coordinates of the grid elements. This can be done as follows (starting from grid definition):
 
-Once these parameters are set, save and run the program:
+```
+# Define grid dimensions
+dims = [8,8,8]
 
-$: python3 buildLattices.py
+# Assign filled elements of grid
+fill = [[[(z>=2)*(z<6) \
+    for z in range(dims[2])] for y in range(dims[1])] for x in range(dims[0])]
+```
+
+In this example, a cubic 8x8x8 unit cell grid has been defined, but only the elements with z>=2 and z<6 are filled, creating an 8x8x4 membrane of unit cells with 2 unit cell vacant regions above and below. Using this flexible syntax, many different kinds of structures (such as the ones mentioned above can be produced.
+
+Once all parameters have been set, save and run the program:
+
+$: python3 gridBuild.py
 
 ## surfaceSi.py
 
+During grid building, an empty unit cell grid of specified dimensions is filled with perfect crystal unit cells according to specified conditions. Regions of the grid may be left empty, allowing for the creation of substructured systems (e.g. membranes, wires, and substrates with surface features). To perform grid building, open gridBuild.py and change the following variables in the parameters section:
+- **name:** A name for your system (string)
+- **lc:** A lattice constant (float)
+- **a1, a2, a3:** Unit cell generating vectors (lists)
+- **bs:** Position vectors for each atom in your basis (nested list)
+- **ms:** Masses for each atom in your basis (list)
+- **dims:** Grid dimensions as multiples of generating vectors (list)
+- **fill:** List of grid elements that should be filled (list)
+- **fType:** The file type you'd like to save (string, "xyz" or "dat")
 
+The variable "fill" can become very cumbersome for large systems when defined element by element. In most cases, it is much quicker and easier to define "fill" using logical conditions on the x, y, and z coordinates of the grid elements. This can be done as follows (starting from grid definition):
+
+```
+# Define grid dimensions
+dims = [8,8,8]
+
+# Assign filled elements of grid
+fill = [[[(z>=2)*(z<6) \
+    for z in range(dims[2])] for y in range(dims[1])] for x in range(dims[0])]
+```
+
+In this example, a cubic 8x8x8 unit cell grid has been defined, but only the elements with z>=2 and z<6 are filled, creating an 8x8x4 membrane of unit cells with 2 unit cell vacant regions above and below. Using this flexible syntax, many different kinds of structures (such as the ones mentioned above can be produced.
+
+Once all parameters have been set, save and run the program:
+
+$: python3 gridBuild.py
 
 ## writeLattice.py
