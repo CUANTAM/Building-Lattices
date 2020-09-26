@@ -93,3 +93,5 @@ Once all parameters have been set, save and run the program:
 $: python3 gridBuild.py
 
 ## writeLattice.py
+
+The writeLattice.py program contains several functions for writing configuration data calculated by other programs in this repository to files that are readable by various simulation software libraries (e.g. LAMMPS .dat files). These functions are called from within the active part of the other scripts, and in most cases do not require the user's attention. If a configuration is needed for a specific simulation software that will not take .xyz or .dat formats, a tailored function will need to be added to this program, and the active part of the building program will need to be edited to call the new function.
