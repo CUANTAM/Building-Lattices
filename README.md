@@ -78,7 +78,7 @@ Unlike the configurations created by gridBuild.py, real Silicon (Si) systems do 
 
 Once all parameters have been set, save and run the program:
 
-$: python3 gridBuild.py
+$: python3 surfaceSi.py
 
 ## writeLattice.py
 
