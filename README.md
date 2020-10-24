@@ -11,7 +11,7 @@ The function of this repository is to write lattice configuration files for crys
 - gridBuild.py
   - Program used to carry out grid building
 - surfaceSi.py
-  - A grid building program for surface reconstructed Silicon
+  - A grid building program for Silicon systems with modified surfaces
 - writeLattice.py
   - Functions for writing various types of configuration files
 
