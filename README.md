@@ -23,13 +23,13 @@ All programs in this repository require numpy.
 
 During bulk building, a perfect crystal unit cell is repeated a specified number of times in three dimensions in order to produce a rectangular crystal supercell. To perform bulk building, open buildBulk.py and change the following variables in the parameters section:
 
-- **name:** A name for your system (string)
-- **lc:** A lattice constant (float)
+- **name:** Name of your system (string)
+- **lc:** Lattice constant(s) (float or 3-element list of floats)
 - **a1, a2, a3:** Unit cell generating vectors (lists)
 - **bs:** Position vectors for each atom in your basis (nested list)
 - **ms:** Masses for each atom in your basis (list)
 - **dims:** Supercell dimensions as multiples of generating vectors (list)
-- **fType:** The file type you'd like to save (string, "xyz" or "dat")
+- **fType:** File type you'd like to have saved (string, "xyz" or "dat")
 
 Once all parameters have been set, save and run the program:
 
@@ -39,14 +39,14 @@ $: python3 bulkBuild.py
 
 During grid building, an empty unit cell grid of specified dimensions is filled with perfect crystal unit cells according to specified conditions. Regions of the grid may be left empty, allowing for the creation of substructured systems (e.g. membranes, wires, and substrates with surface features). To perform grid building, open gridBuild.py and change the following variables in the parameters section:
 
-- **name:** A name for your system (string)
-- **lc:** A lattice constant (float)
+- **name:** Name of your system (string)
+- **lc:** Lattice constant(s) (float or 3-element list of floats)
 - **a1, a2, a3:** Unit cell generating vectors (lists)
 - **bs:** Position vectors for each atom in your basis (nested list)
 - **ms:** Masses for each atom in your basis (list)
 - **dims:** Grid dimensions as multiples of generating vectors (list)
 - **fill:** List of grid elements that should be filled (list)
-- **fType:** The file type you'd like to save (string, "xyz" or "dat")
+- **fType:** File type you'd like to have saved (string, "xyz" or "dat")
 
 The variable "fill" can become very cumbersome for large systems when defined element by element. In most cases, it is much quicker and easier to define "fill" using logical conditions on the x, y, and z coordinates of the grid elements. This can be done as follows (starting from grid definition):
 
@@ -67,14 +67,21 @@ $: python3 gridBuild.py
 
 ## surfaceSi.py
 
-Unlike the configurations created by gridBuild.py, real Silicon (Si) systems do not exhibit regular crystal structure along exposed [1 0 0] surfaces. Rather, the atoms along these surfaces undergo restructuring caused by the presence of dangling bonds (Appelbaum et al, 1976). The surfaceSi.py program builds a conventional cell Si system using the grid method and parses the "fill" variable to automatically detect surfaces. Then, during the configuration building phase, atoms along the surfaces are shifted in order to produce the observed crystal structure and equilibrium bond lengths. Just as with gridBuild.py, this syntax can be used to create Si systems with various substructures. To build surface reconstructed Si systems, open surfaceSi.py and change the following variables in the parameters section:
+Due to the the presence of dangling bonds, real Silicon (Si) systems with exposed [1 0 0] surfaces often do not maintain the conventional Si lattice structure that would be produced by gridBuild.py. Instead, Si atoms along these surfaces tend to restructure themselves into rows of dimers (Appelbaum et al, 1976). Additionally, many applications for Si require the quenching of surface electronic states through hydrogen (H) passivation.
 
-- **name:** A name for your system (string)
-- **aSi:** A lattice constant for Si, or 0 for default (float)
-- **mSi:** A mass for Si, or 0 for default (float)
+The surfaceSi.py program builds Si systems using the grid method and parses the "fill" variable to automatically detect [1 0 0] surfaces. Then, during configuration building, atoms along these surfaces can be shifted to produce the dimer structure, passivated with H atoms, or both. In the case of both passivation and restructuring, surfaces will exhibit a Si(100)2x1:H monohydride structure and, in the case of passivation without restructuring, the surfaces will exhibit a Si(100)1x1:H symmetric dihydride structure (Northrup, 1991).
+
+Just as with gridBuild.py, this program can be used to create Si systems with various substructures. To build Si systems with modified surfaces, open surfaceSi.py and change the following variables in the parameters section:
+
+- **name:** Name of your system (string)
+- **reconstruct:** Flag indicating whether to reconstruct surface Si atoms (boolean)
+- **passivate:** Flag indicating whether to passivate surface Si atoms with H atoms (boolean)
+- **aSi:** Lattice constant of Si, or 0 for default (float)
+- **mSi:** Mass of Si, or 0 for default (float)
 - **dims:** Grid dimensions as multiples of generating vectors (list)
 - **fill:** List of grid elements that should be filled (list)
-- **fType:** The file type you'd like to save (string, "xyz" or "dat")
+- **fType:** File type you'd like to have saved (string, "xyz" or "dat")
+- **check:** Flag indicating whether to check final bond number and lengths against experiment and/or theory (boolean)
 
 Once all parameters have been set, save and run the program:
 
